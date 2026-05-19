@@ -27,16 +27,31 @@
                 @endif
 
                 <div class="mt-4 flex gap-4">
-                    <a href="{{ route('candidatures.edit', $candidature) }}"
-                       class="bg-yellow-400 text-white px-4 py-2 rounded">
-                        Modifier
-                    </a>
-                    <a href="{{ route('candidatures.index') }}"
-                       class="text-gray-500">
-                        Retour
-                    </a>
-                </div>
-            </div>
+
+    <a href="{{ route('candidatures.edit', $candidature) }}"
+       class="bg-yellow-400 text-white px-4 py-2 rounded">
+        Modifier
+    </a>
+
+    <form action="{{ route('candidatures.destroy', $candidature) }}"
+          method="POST"
+          onsubmit="return confirm('Archiver cette candidature ?')">
+
+        @csrf
+        @method('DELETE')
+
+        <button type="submit"
+                class="bg-red-500 text-white px-4 py-2 rounded">
+            Archiver
+        </button>
+    </form>
+
+    <a href="{{ route('candidatures.index') }}"
+       class="text-gray-500">
+        Retour
+    </a>
+
+</div>
 
             {{-- Liste des entretiens --}}
             <div class="bg-white shadow p-6 rounded">

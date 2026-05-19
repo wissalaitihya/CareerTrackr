@@ -52,8 +52,11 @@ class CandidatureController extends Controller
 
     }
 
-    public function destroy($id)
+    public function destroy(Candidature $candidature)
     {
-        //
+    $this->authorize('delete', $candidature);
+    $candidature->delete();
+
+    return redirect()->route('candidatures.index')->with('success', 'Candidature archivée.');
     }
 }
