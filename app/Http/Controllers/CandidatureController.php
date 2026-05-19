@@ -52,6 +52,13 @@ class CandidatureController extends Controller
 
     }
 
+    public function archives()
+    {
+    $candidatures = auth()->user()->candidatures()->onlyTrashed()->latest()->get();
+
+    return view('candidatures.archives', compact('candidatures'));
+    }
+
     public function destroy(Candidature $candidature)
     {
     $this->authorize('delete', $candidature);
