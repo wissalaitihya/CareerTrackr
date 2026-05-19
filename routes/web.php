@@ -22,5 +22,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('candidatures', CandidatureController::class);
 });
 
+Route::get('candidatures/archives', [CandidatureController::class, 'archives'])->name('candidatures.archives');
+
 
 require __DIR__.'/auth.php';
