@@ -1,7 +1,7 @@
 <x-guest-layout>
     <!-- Logo & Header -->
-    <div class="mb-8">
-        <div class="flex items-center gap-2.5 mb-8">
+    <div class="mb-10">
+        <div class="flex items-center gap-2.5 mb-10">
             <div class="relative">
                 <x-application-logo class="w-10 h-10" />
                 <div class="absolute -top-1 -right-1">
@@ -16,16 +16,16 @@
             </div>
         </div>
 
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">
-            Vérifie ton email <span class="inline-block">📧</span>
+        <h1 class="text-[32px] font-extrabold text-gray-900 mb-3">
+            Vérifie ton email <span class="inline-block"></span>
         </h1>
-        <p class="text-gray-500 text-sm">
+        <p class="text-gray-500 text-sm max-w-[280px] leading-relaxed">
             Un lien de vérification a été envoyé à <span class="font-medium text-gray-700">{{ Auth::user()->email }}</span>. Clique dessus pour activer ton compte.
         </p>
     </div>
 
     @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
+        <div class="mb-4 p-4 bg-emerald-50 border border-emerald-200 rounded-2xl">
             <p class="text-sm text-emerald-700">
                 ✅ Un nouveau lien de vérification vient d'être envoyé !
             </p>
@@ -42,7 +42,7 @@
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit" class="w-full py-3 px-6 bg-gray-100 text-gray-700 font-medium text-sm rounded-xl hover:bg-gray-200 transition-colors">
+            <button type="submit" class="w-full py-4 px-6 bg-gray-100 text-gray-700 font-semibold text-sm rounded-2xl hover:bg-gray-200 transition-colors">
                 Se déconnecter
             </button>
         </form>

@@ -13,25 +13,26 @@
 <body class="font-sans antialiased">
     <div class="min-h-screen flex">
         <!-- Left Side - Login Form -->
-        <div class="w-full lg:w-1/2 flex flex-col justify-center items-center px-6 sm:px-12 lg:px-16 xl:px-24 bg-gray-50">
-            <div class="w-full max-w-md">
+        <div class="w-full lg:w-1/2 flex flex-col justify-center items-center px-6 sm:px-10 lg:px-14 xl:px-20 bg-gray-50">
+            <div class="w-full max-w-[400px]">
                 {{ $slot }}
             </div>
         </div>
         
         <!-- Right Side - Illustration -->
-        <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-emerald-500 via-emerald-500 to-teal-500 relative overflow-hidden">
-            <!-- Decorative circles -->
-            <div class="absolute top-20 right-20 w-72 h-72 bg-white/5 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-20 left-20 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl"></div>
+        <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-emerald-400 via-emerald-500 to-teal-400 relative overflow-hidden">
+            <!-- Glow effects -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/10 rounded-full blur-[100px]"></div>
+            <div class="absolute top-20 right-20 w-72 h-72 bg-teal-300/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 left-20 w-96 h-96 bg-emerald-300/15 rounded-full blur-3xl"></div>
             
             <div class="flex flex-col justify-center items-center w-full px-12 xl:px-20 relative z-10">
                 <!-- Floating Cards -->
                 <div class="relative w-full max-w-md">
                     <!-- Card 1 - Doctolib -->
-                    <div class="floating-card absolute top-0 left-0 -rotate-6 z-30 animate-float-1" style="animation-delay: 0s;">
+                    <div class="floating-card absolute top-0 left-0 -rotate-[4deg] z-30 animate-float-1" style="animation-delay: 0s;">
                         <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">DT</div>
+                            <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white font-bold text-sm">DT</div>
                             <div>
                                 <p class="font-semibold text-gray-900 text-sm">Doctolib</p>
                                 <p class="text-xs text-gray-500">Dev Full-Stack</p>
@@ -47,9 +48,9 @@
                     </div>
                     
                     <!-- Card 2 - Qonto -->
-                    <div class="floating-card absolute top-24 left-20 rotate-3 z-20 animate-float-2" style="animation-delay: 0.5s;">
+                    <div class="floating-card absolute top-28 left-20 rotate-[2deg] z-20 animate-float-2" style="animation-delay: 0.5s;">
                         <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">QO</div>
+                            <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center text-white font-bold text-sm">QO</div>
                             <div>
                                 <p class="font-semibold text-gray-900 text-sm">Qonto</p>
                                 <p class="text-xs text-gray-500">SE — Payments</p>
@@ -59,14 +60,14 @@
                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             Offre reçue
                         </span>
-                        <div class="bg-emerald-50 rounded-lg px-3 py-2 flex items-center gap-2">
+                        <div class="bg-emerald-50 rounded-xl px-3 py-2.5 flex items-center gap-2">
                             <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/></svg>
                             <span class="text-sm font-semibold text-emerald-700">56k€ + BSPCE</span>
                         </div>
                     </div>
                     
                     <!-- Card 3 - Funnel -->
-                    <div class="floating-card absolute top-52 left-8 -rotate-2 z-10 animate-float-3" style="animation-delay: 1s;">
+                    <div class="floating-card absolute top-56 left-10 -rotate-[1deg] z-10 animate-float-3" style="animation-delay: 1s;">
                         <div class="flex items-center justify-between mb-3">
                             <span class="text-xs font-semibold text-gray-500 uppercase tracking-wide">FUNNEL</span>
                             <span class="text-xs font-semibold text-emerald-600">+15% ce mois</span>
@@ -107,11 +108,11 @@
                 </div>
                 
                 <!-- Quote -->
-                <div class="text-center mt-12 max-w-md">
-                    <p class="text-white text-2xl font-bold leading-tight mb-4">
+                <div class="text-center mt-12 max-w-[320px]">
+                    <p class="text-white text-[26px] font-bold leading-[1.2] mb-4">
                         « Chaque candidature<br>compte. Suis-les toutes. »
                     </p>
-                    <p class="text-white/70 text-sm leading-relaxed">
+                    <p class="text-white/85 text-sm leading-relaxed">
                         Centralise tes candidatures, garde un œil sur tes entretiens<br>
                         et ne laisse plus jamais une opportunité passer.
                     </p>
@@ -122,16 +123,16 @@
     
     <style>
         @keyframes float-1 {
-            0%, 100% { transform: translateY(0px) rotate(-6deg); }
-            50% { transform: translateY(-10px) rotate(-6deg); }
+            0%, 100% { transform: translateY(0px) rotate(-4deg); }
+            50% { transform: translateY(-10px) rotate(-4deg); }
         }
         @keyframes float-2 {
-            0%, 100% { transform: translateY(0px) rotate(3deg); }
-            50% { transform: translateY(-8px) rotate(3deg); }
+            0%, 100% { transform: translateY(0px) rotate(2deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
         }
         @keyframes float-3 {
-            0%, 100% { transform: translateY(0px) rotate(-2deg); }
-            50% { transform: translateY(-12px) rotate(-2deg); }
+            0%, 100% { transform: translateY(0px) rotate(-1deg); }
+            50% { transform: translateY(-12px) rotate(-1deg); }
         }
         .animate-float-1 { animation: float-1 4s ease-in-out infinite; }
         .animate-float-2 { animation: float-2 5s ease-in-out infinite; }
