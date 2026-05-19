@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCandidatureRequest;
 
 class CandidatureController extends Controller
 {
@@ -14,12 +15,13 @@ class CandidatureController extends Controller
 
     public function create()
     {
-        //
+        return view ('candidature_create')
     }
 
-    public function store(Request $request)
+    public function store(StoreCandidatureRequest $request)
     {
-        //
+        auth()->user()->candidatures()->create($request->validated());
+        return redirect()->route('candidatures.index')->with('success', 'Candidature créée avec succès.');
     }
 
     public function show($id)
