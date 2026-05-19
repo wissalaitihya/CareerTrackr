@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreCandidatureRequest;
+use App\Http\Requests\Auth\StoreCandidatureRequest;
 
 class CandidatureController extends Controller
 {
@@ -15,7 +15,7 @@ class CandidatureController extends Controller
 
     public function create()
     {
-        return view ('candidature_create')
+        return view ('candidatures.create');
     }
 
     public function store(StoreCandidatureRequest $request)
