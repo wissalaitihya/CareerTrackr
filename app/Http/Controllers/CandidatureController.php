@@ -26,7 +26,11 @@ class CandidatureController extends Controller
 
     public function show($id)
     {
-        //
+        $candidature = auth()->user()->candidatures()->findOrFail($id);
+        $this->authorize('view', $candidature);
+        $candidature->load('entretiens');
+
+        return view('candidatures.show', compact('candidature'));
     }
 
     public function edit($id)
