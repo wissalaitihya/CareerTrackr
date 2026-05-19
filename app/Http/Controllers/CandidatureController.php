@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\StoreCandidatureRequest;
+use App\Http\Requests\Auth\UpdateCandidatureRequest;
+use App\Models\Candidature;
 
 class CandidatureController extends Controller
 {
@@ -33,14 +35,21 @@ class CandidatureController extends Controller
         return view('candidatures.show', compact('candidature'));
     }
 
-    public function edit($id)
+    public function edit(Candidature $candidature)
     {
-        //
+        $this->authorize('update', $candidature);
+
+    return view('candidatures.edit', compact('candidature'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateCandidatureRequest $request, Candidature $candidature)
     {
-        //
+         $this->authorize('update', $candidature);
+    $candidature->update($request->validated());
+
+    return redirect()->route('candidatures.show', $candidature)
+        ->with('success', 'Candidature mise à jour.');
+
     }
 
     public function destroy($id)
