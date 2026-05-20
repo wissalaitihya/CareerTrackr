@@ -58,6 +58,10 @@
                 <div class="flex justify-between mb-4">
                     <h3 class="font-bold text-lg">Entretiens</h3>
                 </div>
+                <a href="{{ route('entretiens.create', $candidature) }}"
+   class="bg-blue-500 text-white px-4 py-2 rounded">
+    + Ajouter un entretien
+</a>
 
                 @forelse ($candidature->entretiens as $entretien)
                     <div class="border-b py-3">

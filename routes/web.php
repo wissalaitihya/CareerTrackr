@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CandidatureController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EntretienController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,4 +27,6 @@ Route::get('candidatures/archives', [CandidatureController::class, 'archives'])-
 
 Route::get('candidatures/{id}/restore',[CandidatureController::class, 'restore'])->name('candidatures.restore');
 
+Route::get('candidatures/{candidature}/entretiens/create', [EntretienController::class, 'create'])->name('entretiens.create');
+Route::post('candidatures/{candidature}/entretiens', [EntretienController::class, 'store'])->name('entretiens.store');
 require __DIR__.'/auth.php';
