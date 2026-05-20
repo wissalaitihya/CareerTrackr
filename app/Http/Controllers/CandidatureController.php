@@ -10,11 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CandidatureController extends Controller
 {
-    public function index(Request $request
-    
-    )
-    {
-        
+    public function index(Request $request){  
     $query = auth()->user()
         ->candidatures()
         ->withCount('entretiens');
