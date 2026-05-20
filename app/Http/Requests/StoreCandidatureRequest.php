@@ -7,29 +7,22 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCandidatureRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
             'company_name'     => 'required|string|max:255',
             'job_title'        => 'required|string|max:255',
             'offer_url'        => 'nullable|url|max:500',
-            'status'           => 'required|in:envoyée,en_attente,entretien,offre,refusée',
+            'status'           => 'nullable|in:postulé,entretien_rh,test_technique,entretien_final,offre_reçue,refusé',
             'priority'         => 'required|in:basse,moyenne,haute',
-            'notes'            => 'nullable|string',
+            'notes'            => 'nullable|string|max:1000',
             'application_date' => 'required|date',
+            'attachment'       => 'nullable|file|mimes:pdf,doc,docx|max:5120',
         ];
     }
 }
