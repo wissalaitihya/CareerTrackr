@@ -24,5 +24,6 @@ Route::middleware('auth')->group(function(){
 
 Route::get('candidatures/archives', [CandidatureController::class, 'archives'])->name('candidatures.archives');
 
+Route::get('candidatures/{id}/restore',[CandidatureController::class, 'restore'])->name('candidatures.restore');
 
 require __DIR__.'/auth.php';
