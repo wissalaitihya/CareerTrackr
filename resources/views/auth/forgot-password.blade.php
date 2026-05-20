@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div>
-                <p class="font-bold text-lg text-gray-900 leading-tight">CandidatureTracker</p>
+                <p class="font-bold text-lg text-gray-900 leading-tight">CareerTrackr</p>
                 <p class="text-xs text-gray-400 font-medium tracking-wide">JOB HUNT OS</p>
             </div>
         </div>

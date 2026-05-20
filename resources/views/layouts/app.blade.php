@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'CandidatureTracker') }}</title>
+    <title>{{ config('app.name', 'CareerTrackr') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
                 
                 <!-- Brand Text -->
                 <div>
-                    <h1 class="text-lg font-bold text-teal-600 leading-tight">CandidatureTracker</h1>
+                    <h1 class="text-lg font-bold text-teal-600 leading-tight">CareerTrackr</h1>
                     <p class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">JOB HUNT OS</p>
                 </div>
             </div>
