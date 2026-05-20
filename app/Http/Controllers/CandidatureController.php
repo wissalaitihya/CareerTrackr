@@ -10,10 +10,27 @@ use Illuminate\Support\Facades\Storage;
 
 class CandidatureController extends Controller
 {
-    public function index()
+    public function index(Request $request
+    
+    )
     {
-        $candidatures = auth()->user()->candidatures()->with('entretiens')->latest()->get();
-        return view('candidatures.index', compact('candidatures'));
+        
+    $query = auth()->user()
+        ->candidatures()
+        ->withCount('entretiens');
+
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
+    }
+
+    if ($request->filled('priority')) {
+        $query->where('priority', $request->priority);
+    }
+
+    $candidatures = $query->latest()->get();
+
+    return view('candidatures.index', compact('candidatures'));
+
     }
 
     public function create()
