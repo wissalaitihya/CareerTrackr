@@ -12,7 +12,7 @@ class CandidatureController extends Controller
 {
     public function index()
     {
-        $candidatures = auth()->user()->candidatures()->with('entretiens')->latest()->get();
+        $candidatures = auth()->user()->candidatures()->withCount('entretiens')->latest()->get();
         return view('candidatures.index', compact('candidatures'));
     }
 

@@ -63,4 +63,80 @@
   .priority-card-selected-basse {
     @apply border-green-400 bg-green-50 ring-2 ring-green-200;
   }
+
+  .filter-pill {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 text-gray-600 text-xs font-medium rounded-full hover:bg-gray-200 transition-colors duration-200 cursor-pointer;
+  }
+
+  .filter-pill-active {
+    @apply bg-gradient-to-r from-teal-500 to-emerald-500 text-white shadow-sm;
+  }
+
+  .candidature-card {
+    @apply bg-white border border-slate-200 rounded-2xl shadow-sm p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-200;
+  }
+
+  .status-badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-full;
+  }
+
+  .status-entretien {
+    @apply bg-blue-50 text-blue-700;
+  }
+
+  .status-postule {
+    @apply bg-orange-50 text-orange-700;
+  }
+
+  .status-attente {
+    @apply bg-amber-50 text-amber-700;
+  }
+
+  .status-offre {
+    @apply bg-emerald-50 text-emerald-700;
+  }
+
+  .status-accepte {
+    @apply bg-green-50 text-green-700;
+  }
+
+  .status-refuse {
+    @apply bg-red-50 text-red-700;
+  }
+
+  .priority-haute {
+    @apply bg-red-50 text-red-600;
+  }
+
+  .priority-moyenne {
+    @apply bg-yellow-50 text-yellow-600;
+  }
+
+  .priority-basse {
+    @apply bg-green-50 text-green-600;
+  }
+
+  .border-entretien {
+    @apply border-l-4 border-l-blue-400;
+  }
+
+  .border-postule {
+    @apply border-l-4 border-l-orange-400;
+  }
+
+  .border-attente {
+    @apply border-l-4 border-l-amber-400;
+  }
+
+  .border-offre {
+    @apply border-l-4 border-l-emerald-400;
+  }
+
+  .border-accepte {
+    @apply border-l-4 border-l-green-400;
+  }
+
+  .border-refuse {
+    @apply border-l-4 border-l-red-400;
+  }
 }
