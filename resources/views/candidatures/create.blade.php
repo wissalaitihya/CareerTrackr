@@ -15,6 +15,18 @@
             </nav>
 
             <!-- Header -->
+            @if(session('success'))
+                <div class="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
+                    <p class="text-sm text-emerald-700 font-medium">✅ {{ session('success') }}</p>
+                </div>
+            @endif
+
+            @if($errors->any())
+                <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
+                    <p class="text-sm text-red-700 font-medium">⚠️ Veuillez corriger les erreurs ci-dessous.</p>
+                </div>
+            @endif
+
             <div class="mb-8">
                 <h1 class="text-2xl font-bold text-gray-900">Nouvelle candidature</h1>
                 <p class="text-gray-500 mt-1">Remplis le formulaire pour suivre cette opportunité.</p>
@@ -37,7 +49,6 @@
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Nom de l'entreprise -->
                             <div>
                                 <label for="company_name" class="form-label">
                                     Nom de l'entreprise <span class="text-red-500">*</span>
@@ -50,7 +61,6 @@
                                 @enderror
                             </div>
 
-                            <!-- URL de l'offre -->
                             <div>
                                 <label for="offer_url" class="form-label">URL de l'offre</label>
                                 <input type="url" id="offer_url" name="offer_url" 
@@ -76,7 +86,6 @@
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Intitulé du poste -->
                             <div>
                                 <label for="job_title" class="form-label">
                                     Intitulé du poste <span class="text-red-500">*</span>
@@ -89,7 +98,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Date de candidature -->
                             <div>
                                 <label for="application_date" class="form-label">
                                     Date de candidature <span class="text-red-500">*</span>
@@ -115,7 +123,6 @@
                             <h2 class="text-lg font-semibold text-gray-900">Suivi</h2>
                         </div>
 
-                        <!-- Statut -->
                         <div class="mb-6">
                             <label for="status" class="form-label">Statut</label>
                             <div class="relative">
@@ -138,11 +145,9 @@
                             @enderror
                         </div>
 
-                        <!-- Priorité -->
                         <div>
                             <label class="form-label">Priorité</label>
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" x-data="{ priority: '{{ old('priority', 'moyenne') }}' }">
-                                <!-- Haute -->
                                 <div class="priority-card" 
                                      :class="priority === 'haute' ? 'priority-card-selected-haute' : ''"
                                      @click="priority = 'haute'">
@@ -156,7 +161,6 @@
                                     <p class="text-xs text-gray-500">Top priorité, à suivre de près</p>
                                 </div>
 
-                                <!-- Moyenne -->
                                 <div class="priority-card" 
                                      :class="priority === 'moyenne' ? 'priority-card-selected-moyenne' : ''"
                                      @click="priority = 'moyenne'">
@@ -170,7 +174,6 @@
                                     <p class="text-xs text-gray-500">Intéressant, suivi régulier</p>
                                 </div>
 
-                                <!-- Basse -->
                                 <div class="priority-card" 
                                      :class="priority === 'basse' ? 'priority-card-selected-basse' : ''"
                                      @click="priority = 'basse'">
@@ -224,22 +227,23 @@
                             <h2 class="text-lg font-semibold text-gray-900">Pièce jointe</h2>
                         </div>
 
-                        <div class="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center hover:border-green-400 hover:bg-green-50/30 transition-all duration-200 cursor-pointer"
-                             x-data="{ dragging: false }"
+                        <div class="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center hover:border-green-400 hover:bg-green-50/30 transition-all duration-200"
+                             x-data="{ dragging: false, fileName: '' }"
                              @dragover.prevent="dragging = true"
                              @dragleave.prevent="dragging = false"
-                             @drop.prevent="dragging = false"
+                             @drop.prevent="dragging = false; if ($event.dataTransfer.files.length) { fileName = $event.dataTransfer.files[0].name; $refs.fileInput.files = $event.dataTransfer.files; }"
                              :class="dragging ? 'border-green-400 bg-green-50/50' : ''">
-                            <input type="file" name="attachment" accept=".pdf,.doc,.docx" class="hidden" id="file-upload">
-                            <label for="file-upload" class="cursor-pointer">
+                            <input type="file" name="attachment" accept=".pdf,.doc,.docx" class="hidden" x-ref="fileInput" @change="fileName = $event.target.files[0]?.name || ''">
+                            <div class="cursor-pointer" @click="$refs.fileInput.click()">
                                 <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
                                     <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                                     </svg>
                                 </div>
-                                <p class="text-sm font-medium text-gray-700">Glissez votre CV ou <span class="text-green-600">cliquez</span></p>
+                                <p class="text-sm font-medium text-gray-700" x-show="!fileName">Glissez votre CV ou <span class="text-green-600">cliquez</span></p>
+                                <p class="text-sm font-medium text-green-600" x-show="fileName" x-text="fileName"></p>
                                 <p class="text-xs text-gray-400 mt-1">PDF, DOC, DOCX • 5 Mo max</p>
-                            </label>
+                            </div>
                         </div>
                         @error('attachment')
                             <p class="text-red-500 text-xs mt-1.5">{{ $message }}</p>

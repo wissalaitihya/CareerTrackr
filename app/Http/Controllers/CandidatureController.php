@@ -24,14 +24,17 @@ class CandidatureController extends Controller
     public function store(StoreCandidatureRequest $request)
     {
         $data = $request->validated();
-        
+
         if ($request->hasFile('attachment')) {
-            $data['attachment'] = $request->file('attachment')->store('attachments');
+            $file = $request->file('attachment');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $data['attachment'] = $file->storeAs('attachments', $fileName, 'public');
         }
-        
+
         auth()->user()->candidatures()->create($data);
-        
-        return redirect()->route('candidatures.index')->with('success', 'Candidature créée avec succès.');
+
+        return redirect()->route('candidatures.index')
+            ->with('success', 'Candidature ajoutée avec succès.');
     }
 
     public function show($id)
