@@ -29,4 +29,7 @@ Route::get('candidatures/{id}/restore',[CandidatureController::class, 'restore']
 
 Route::get('candidatures/{candidature}/entretiens/create', [EntretienController::class, 'create'])->name('entretiens.create');
 Route::post('candidatures/{candidature}/entretiens', [EntretienController::class, 'store'])->name('entretiens.store');
+Route::get('candidatures/{candidature}/entretiens/{entretien}/edit', [EntretienController::class, 'edit'])->name('entretiens.edit');
+Route::put('candidatures/{candidature}/entretiens/{entretien}', [EntretienController::class, 'update'])->name('entretiens.update');
+Route::delete('candidatures/{candidature}/entretiens/{entretien}', [EntretienController::class, 'destroy'])->name('entretiens.destroy');
 require __DIR__.'/auth.php';
