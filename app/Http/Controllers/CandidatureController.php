@@ -62,12 +62,12 @@ class CandidatureController extends Controller
             if ($candidature->attachment) {
                 Storage::delete($candidature->attachment);
             }
-            $data['attachment'] = $request->file('attachment')->store('attachments');
+            $data['attachment'] = $request->file('attachment')->store('attachments', 'public');
         }
         
         $candidature->update($data);
 
-        return redirect()->route('candidatures.show', $candidature)
+        return redirect()->back()
             ->with('success', 'Candidature mise à jour.');
     }
 
@@ -75,6 +75,16 @@ class CandidatureController extends Controller
     {
         $candidatures = auth()->user()->candidatures()->onlyTrashed()->latest()->get();
         return view('candidatures.archives', compact('candidatures'));
+    }
+
+    public function restore($id)
+    {
+    $candidature = Candidature::onlyTrashed()->findOrFail($id);
+    $this->authorize('restore', $candidature);
+    $candidature->restore();
+
+    return redirect()->route('candidatures.archives')
+        ->with('success', 'Candidature restaurée.');
     }
 
     public function destroy(Candidature $candidature)
