@@ -48,7 +48,8 @@
                    class="nav-link {{ request()->routeIs('candidatures.*') ? 'nav-link-active' : '' }}">
                     Mes candidatures
                 </a>
-                <a href="#" class="nav-link">
+                <a href="{{ route('candidatures.archives') }}" 
+                   class="nav-link {{ request()->routeIs('candidatures.archives') ? 'nav-link-active' : '' }}">
                     Archives
                 </a>
             </nav>
@@ -101,7 +102,7 @@
             <div class="px-4 py-3 space-y-1">
                 <a href="{{ route('dashboard') }}" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100">Tableau de bord</a>
                 <a href="{{ route('candidatures.index') }}" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100">Mes candidatures</a>
-                <a href="#" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100">Archives</a>
+                <a href="{{ route('candidatures.archives') }}" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100">Archives</a>
                 <div class="pt-3 border-t border-gray-100">
                     <a href="{{ route('candidatures.create') }}" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-semibold rounded-full">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

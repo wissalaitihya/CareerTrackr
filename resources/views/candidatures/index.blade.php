@@ -149,7 +149,7 @@
                         
                         $priorityLabel = match($candidature->priority) {
                             'haute' => '🔥 Haute',
-                            'moyenne' => ' Moyenne',
+                            'moyenne' =>' Moyenne',
                             'basse' => '🌱 Basse',
                             default => '⚡ Moyenne',
                         };
