@@ -25,84 +25,7 @@
                 </div>
             </div>
 
-            <!-- Filter Bar -->
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-8" x-data="{ activeFilter: 'toutes', searchQuery: '' }">
-                <div class="flex flex-col lg:flex-row lg:items-center gap-4">
-                    <!-- Search Input -->
-                    <div class="flex-1 relative">
-                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                        </svg>
-                        <input type="text" 
-                               x-model="searchQuery"
-                               placeholder="Entreprise, poste, notes..." 
-                               class="w-full h-10 pl-10 pr-4 bg-gray-50 border-0 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 transition-all duration-200">
-                    </div>
-
-                    <!-- Filter Pills -->
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <button @click="activeFilter = 'toutes'" 
-                                :class="activeFilter === 'toutes' ? 'filter-pill-active' : 'filter-pill'"
-                                class="filter-pill">
-                            Toutes
-                        </button>
-                        <button @click="activeFilter = 'postulé'" 
-                                :class="activeFilter === 'postulé' ? 'filter-pill-active' : 'filter-pill'"
-                                class="filter-pill">
-                            <span class="w-2 h-2 rounded-full bg-orange-400"></span>
-                            Postulé
-                        </button>
-                        <button @click="activeFilter = 'entretien'" 
-                                :class="activeFilter === 'entretien' ? 'filter-pill-active' : 'filter-pill'"
-                                class="filter-pill">
-                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
-                            Entretien
-                        </button>
-                        <button @click="activeFilter = 'en_attente'" 
-                                :class="activeFilter === 'en_attente' ? 'filter-pill-active' : 'filter-pill'"
-                                class="filter-pill">
-                            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-                            En attente
-                        </button>
-                        <button @click="activeFilter = 'offre'" 
-                                :class="activeFilter === 'offre' ? 'filter-pill-active' : 'filter-pill'"
-                                class="filter-pill">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                            Offre
-                        </button>
-                        <button @click="activeFilter = 'accepté'" 
-                                :class="activeFilter === 'accepté' ? 'filter-pill-active' : 'filter-pill'"
-                                class="filter-pill">
-                            <span class="w-2 h-2 rounded-full bg-green-400"></span>
-                            Accepté
-                        </button>
-                        <button @click="activeFilter = 'refusé'" 
-                                :class="activeFilter === 'refusé' ? 'filter-pill-active' : 'filter-pill'"
-                                class="filter-pill">
-                            <span class="w-2 h-2 rounded-full bg-red-400"></span>
-                            Refusé
-                        </button>
-                    </div>
-
-                    <!-- Priority Dropdown -->
-                    <div class="relative" x-data="{ open: false, selected: 'Toutes priorités' }">
-                        <button @click="open = !open" 
-                                class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-xl text-sm text-gray-600 hover:bg-gray-100 transition-colors duration-200">
-                            <span x-text="selected"></span>
-                            <svg class="w-4 h-4" :class="{'rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                            </svg>
-                        </button>
-                        <div x-show="open" @click.away="open = false" 
-                             class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-slate-200 py-2 z-50">
-                            <button @click="selected = 'Toutes priorités'; open = false" class="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 text-left">Toutes priorités</button>
-                            <button @click="selected = 'Haute'; open = false" class="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 text-left"> Haute</button>
-                            <button @click="selected = 'Moyenne'; open = false" class="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 text-left">⚡ Moyenne</button>
-                            <button @click="selected = 'Basse'; open = false" class="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 text-left">🌱 Basse</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
             <!-- Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -159,8 +82,7 @@
                         $colorIndex = crc32($candidature->company_name) % count($companyColors);
                         $companyColor = $companyColors[$colorIndex];
                         
-                        $daysAgo = now()->diffInDays(\Carbon\Carbon::parse($candidature->application_date));
-                        $dateLabel = $daysAgo === 0 ? "Aujourd'hui" : ($daysAgo === 1 ? 'Hier' : "il y a $daysAgo jours");
+                       $dateLabel = $candidature->created_at->diffForHumans();
                     @endphp
                     
                     <div class="candidature-card {{ $statusClass }}">

@@ -11,12 +11,11 @@ use Illuminate\Support\Facades\Storage;
 class CandidatureController extends Controller
 {
     public function index()
-    {
-        $candidatures = auth()->user()->candidatures()->withCount('entretiens')->latest()->get();
-        return view('candidatures.index', compact('candidatures'));
-    }
-
-    public function create()
+{
+    $candidatures = auth()->user()->candidatures()->withCount('entretiens')->latest()->get();
+    return view('candidatures.index', compact('candidatures'));
+}
+   public function create()
     {
         return view('candidatures.create');
     }
