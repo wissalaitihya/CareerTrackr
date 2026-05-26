@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Storage;
 class CandidatureController extends Controller
 {
     public function index()
-{
+    {
     $candidatures = auth()->user()->candidatures()->withCount('entretiens')->latest()->get();
     return view('candidatures.index', compact('candidatures'));
-}
+    }
    public function create()
     {
         return view('candidatures.create');
@@ -94,13 +94,4 @@ class CandidatureController extends Controller
         return redirect()->route('candidatures.index')->with('success', 'Candidature archivée.');
     }
 
-    public function restore($id)
-    {
-        $candidature = Candidature::onlyTrashed()->findOrFail($id);
-       $this->authorize('restore', $candidature);
-        $candidature->restore();
-
-        return redirect()->route('candidatures.index')->with('success', 'Candidature restaurée.');
-
-    }
 }

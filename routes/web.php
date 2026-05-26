@@ -4,7 +4,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CandidatureController;
 use App\Http\Controllers\EntretienController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EntretienController;
 
 Route::get('/', function () {
     return view('welcome');
