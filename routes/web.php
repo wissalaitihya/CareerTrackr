@@ -31,5 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('candidatures/{candidature}/entretiens/{entretien}/edit', [EntretienController::class, 'edit'])->name('entretiens.edit');
     Route::put('candidatures/{candidature}/entretiens/{entretien}', [EntretienController::class, 'update'])->name('entretiens.update');
     Route::delete('candidatures/{candidature}/entretiens/{entretien}', [EntretienController::class, 'destroy'])->name('entretiens.destroy');
+
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 });
 require __DIR__.'/auth.php';
