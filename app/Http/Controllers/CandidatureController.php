@@ -93,4 +93,14 @@ class CandidatureController extends Controller
 
         return redirect()->route('candidatures.index')->with('success', 'Candidature archivée.');
     }
+
+    public function restore($id)
+    {
+        $candidature = Candidature::onlyTrashed()->findOrFail($id);
+       $this->authorize('restore', $candidature);
+        $candidature->restore();
+
+        return redirect()->route('candidatures.index')->with('success', 'Candidature restaurée.');
+
+    }
 }

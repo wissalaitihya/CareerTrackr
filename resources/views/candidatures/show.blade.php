@@ -283,6 +283,10 @@
                         </div>
                     </div>
                 </div>
+                <a href="{{ route('entretiens.create', $candidature) }}"
+   class="bg-blue-500 text-white px-4 py-2 rounded">
+    + Ajouter un entretien
+</a>
 
                 {{-- Right Sidebar --}}
                 <div class="space-y-6">
