@@ -17,6 +17,9 @@
                     <x-nav-link :href="route('candidatures.index')" :active="request()->routeIs('candidatures.*')">
                         {{ __('Mes candidatures') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('candidatures.archives')" :active="request()->routeIs('candidatures.archives')">
+                        {{ __('Archives') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -74,6 +77,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('candidatures.index')" :active="request()->routeIs('candidatures.*')">
                 {{ __('Mes candidatures') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('candidatures.archives')" :active="request()->routeIs('candidatures.archives')">
+                {{ __('Archives') }}
             </x-responsive-nav-link>
         </div>
 

@@ -17,9 +17,9 @@ class StoreCandidatureRequest extends FormRequest
         return [
             'company_name'     => 'required|string|max:255',
             'job_title'        => 'required|string|max:255',
-            'offer_url'        => 'nullable|url|max:500',
+            'offer_url'        => 'nullable|string|max:500',
             'status'           => 'nullable|in:postulé,entretien_rh,test_technique,entretien_final,offre_reçue,refusé',
-            'priority'         => 'required|in:basse,moyenne,haute',
+            'priority'         => 'nullable|in:basse,moyenne,haute',
             'notes'            => 'nullable|string|max:1000',
             'application_date' => 'required|date',
             'attachment'       => 'nullable|file|mimes:pdf,doc,docx|max:5120',

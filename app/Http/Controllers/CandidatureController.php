@@ -10,26 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class CandidatureController extends Controller
 {
-    public function index(Request $request){  
-    $query = auth()->user()
-        ->candidatures()
-        ->withCount('entretiens');
-
-    if ($request->filled('status')) {
-        $query->where('status', $request->status);
-    }
-
-    if ($request->filled('priority')) {
-        $query->where('priority', $request->priority);
-    }
-
-    $candidatures = $query->latest()->get();
-
+    public function index()
+{
+    $candidatures = auth()->user()->candidatures()->withCount('entretiens')->latest()->get();
     return view('candidatures.index', compact('candidatures'));
-
-    }
-
-    public function create()
+}
+   public function create()
     {
         return view('candidatures.create');
     }
@@ -37,14 +23,17 @@ class CandidatureController extends Controller
     public function store(StoreCandidatureRequest $request)
     {
         $data = $request->validated();
-        
+
         if ($request->hasFile('attachment')) {
-            $data['attachment'] = $request->file('attachment')->store('attachments');
+            $file = $request->file('attachment');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $data['attachment'] = $file->storeAs('attachments', $fileName, 'public');
         }
-        
+
         auth()->user()->candidatures()->create($data);
-        
-        return redirect()->route('candidatures.index')->with('success', 'Candidature créée avec succès.');
+
+        return redirect()->route('candidatures.index')
+            ->with('success', 'Candidature ajoutée avec succès.');
     }
 
     public function show($id)
@@ -72,12 +61,12 @@ class CandidatureController extends Controller
             if ($candidature->attachment) {
                 Storage::delete($candidature->attachment);
             }
-            $data['attachment'] = $request->file('attachment')->store('attachments');
+            $data['attachment'] = $request->file('attachment')->store('attachments', 'public');
         }
         
         $candidature->update($data);
 
-        return redirect()->route('candidatures.show', $candidature)
+        return redirect()->back()
             ->with('success', 'Candidature mise à jour.');
     }
 
@@ -85,6 +74,16 @@ class CandidatureController extends Controller
     {
         $candidatures = auth()->user()->candidatures()->onlyTrashed()->latest()->get();
         return view('candidatures.archives', compact('candidatures'));
+    }
+
+    public function restore($id)
+    {
+    $candidature = Candidature::onlyTrashed()->findOrFail($id);
+    $this->authorize('restore', $candidature);
+    $candidature->restore();
+
+    return redirect()->route('candidatures.archives')
+        ->with('success', 'Candidature restaurée.');
     }
 
     public function destroy(Candidature $candidature)

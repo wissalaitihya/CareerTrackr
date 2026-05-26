@@ -48,7 +48,8 @@
                    class="nav-link {{ request()->routeIs('candidatures.*') ? 'nav-link-active' : '' }}">
                     Mes candidatures
                 </a>
-                <a href="#" class="nav-link">
+                <a href="{{ route('candidatures.archives') }}" 
+                   class="nav-link {{ request()->routeIs('candidatures.archives') ? 'nav-link-active' : '' }}">
                     Archives
                 </a>
             </nav>
@@ -81,27 +82,57 @@
                 </a>
 
                 <!-- User Avatar -->
-                <div class="flex items-center gap-3 ml-2 pl-3 border-l border-gray-200">
-                    <div class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md">
-                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}{{ strtoupper(substr(explode(' ', Auth::user()->name)[1] ?? '', 0, 1)) }}
-                    </div>
-                </div>
+                <div class="relative" x-data="{ open: false }">
+    <button @click="open = !open" @click.away="open = false"
+            class="w-9 h-9 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md">
+        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}{{ strtoupper(substr(explode(' ', Auth::user()->name)[1] ?? '', 0, 1)) }}
+    </button>
 
-                <!-- Mobile Menu Button -->
-                <button @click="open = ! open" class="sm:hidden p-2 rounded-lg text-gray-500 hover:bg-gray-100">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
-            </div>
+    <div x-show="open" x-transition
+         class="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50">
+        
+        <div class="px-4 py-2 border-b border-gray-100">
+            <p class="text-xs text-gray-400">Connecté en tant que</p>
+            <p class="text-sm font-semibold text-gray-900">{{ Auth::user()->name }}</p>
         </div>
+
+        <a href="{{ route('profile.edit') }}"
+           class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-all">
+            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+            Mon profil
+        </a>
+
+        <a href="{{ route('dashboard') }}"
+           class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-all">
+            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            Tableau de bord
+        </a>
+
+        <div class="border-t border-gray-100 mt-1 pt-1">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit"
+                        class="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-all">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    Se déconnecter
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
 
         <!-- Mobile Menu -->
         <div x-show="open" @click.away="open = false" class="sm:hidden border-t border-gray-100 bg-white">
             <div class="px-4 py-3 space-y-1">
                 <a href="{{ route('dashboard') }}" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100">Tableau de bord</a>
                 <a href="{{ route('candidatures.index') }}" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100">Mes candidatures</a>
-                <a href="#" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100">Archives</a>
+                <a href="{{ route('candidatures.archives') }}" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100">Archives</a>
                 <div class="pt-3 border-t border-gray-100">
                     <a href="{{ route('candidatures.create') }}" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-semibold rounded-full">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
